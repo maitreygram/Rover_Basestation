@@ -7,9 +7,15 @@ void navCallback(const std_msgs::Float64MultiArray::ConstPtr& msg) {
 
 	std::vector<double> inp = msg -> data;
 	float linSpeed = inp[0];
-	float angSpeed = inp[1]; 
+	float angSpeed = inp[1];
+	float basemotor = inp[2]
+	float shoulderactuator = inp[3];
+	float elbowmotor = inp[4];
+	float pitchmotor = inp[5];
+	float rollmotor = inp[6];
+	float grippermotor = inp[7]; 
 
-	std::vector<double> out(10, 0);
+	std::vector<double> out(16, 0);
 	for(int i=0; i<6;i++) {
 		out[i] = linSpeed;
 	}
@@ -17,6 +23,12 @@ void navCallback(const std_msgs::Float64MultiArray::ConstPtr& msg) {
 	out[7] = -angSpeed;
 	out[8] = -angSpeed;
 	out[9] = angSpeed;
+	out[10] = basemotor;
+	out[11] = shoulderactuator;
+	out[12] = elbowmotor;
+	out[13] = pitchmotor;
+	out[14] = rollmotor
+	out[15] = grippermotor
 
 	std_msgs::Float64MultiArray outMsg;
 	outMsg.data = out;
