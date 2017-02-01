@@ -4,9 +4,8 @@
 
 #define MAX_LIN_SPEED 230
 #define MAX_ANGLE 30
-#define MOTOR_SPEEDS 150
 
-ros::Publisher mob_pub;
+ros::Publisher control_pub;
 
 void joyCallback(const sensor_msgs::Joy::ConstPtr& joy) {
 
@@ -27,11 +26,11 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy) {
 	
 	if( but[2] == 1)
 		{
-			out[2] = - MOTOR_SPEEDS;	
+			out[2] = -1;	
 		}
 	else if ( but[1] == 1)
 		{	
-			out[2] = MOTOR_SPEEDS;	
+			out[2] = 1;	
 		}
 	else {out[2] = 0;}
 
@@ -39,43 +38,43 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy) {
 	
 	if( but[0] == 1)
 		{
-			out[3] = - MOTOR_SPEEDS;	
+			out[3] = -1;	
 		}
 	else if ( but[3] == 1)
 		{	
-			out[3] = MOTOR_SPEEDS;	
+			out[3] = 1;	
 		}
 	else {out[3] = 0;}
 
 	////////////ElbowMotor////////////
 	
-	out[4] = MOTOR_SPEEDS * axe[7];
+	out[4] =  axe[7];
 
 	////////////PitchMotor////////////
 	
 	if( but[4] == 1)
 		{
-			out[5] = - MOTOR_SPEEDS;	
+			out[5] = -1;	
 		}
 	else if ( but[5] == 1)
 		{	
-			out[5] = MOTOR_SPEEDS;	
+			out[5] = 1;	
 		}
 	else {out[5] = 0;}
 
 	////////////RollMotor////////////
 	
-	out[6] = MOTOR_SPEEDS * axe[6];
+	out[6] = * axe[6];
 
 	////////////GripperMotor////////////
 	
 	if( axe[2] == -1)
 		{
-			out[7] = - MOTOR_SPEEDS;	
+			out[7] = -1;	
 		}
 	else if ( axe[5] == -1)
 		{	
-			out[7] = MOTOR_SPEEDS;	
+			out[7] = 1;	
 		}
 	else {out[7] = 0;}
 
@@ -89,7 +88,7 @@ int main(int argc, char** argv) {
 	ros::init(argc, argv, "joystick_driver");
 	ros::NodeHandle _nh;
 	
-	mob_pub = _nh.advertise<std_msgs::Float64MultiArray>("/rover/mobility_directives", 100);
+	control_pub = _nh.advertise<std_msgs::Float64MultiArray>("/rover/control_directives", 100);
 	ros::Subscriber joy_sub = _nh.subscribe("/joy", 100, joyCallback);
 	ros::Rate loop_rate(100);
 
