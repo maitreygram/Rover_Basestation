@@ -1,2 +1,0 @@
-roboclaw_node:rover_mobility
--DCATKIN_DEVEL_PREFIX=/home/utkarsh/rover_ws/devel -DCMAKE_INSTALL_PREFIX=/home/utkarsh/rover_ws/install -G Unix Makefiles
