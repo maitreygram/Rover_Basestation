@@ -1,9 +1,0 @@
-#!/bin/bash
-
-cd /home/utkarsh/rover_ws
-source devel/setup.bash
-
-export ROS_MASTER_URI=http://192.168.1.103:11311
-export ROS_IP=192.168.1.37
-
-roslaunch rover_mobility joystick_run.launch
