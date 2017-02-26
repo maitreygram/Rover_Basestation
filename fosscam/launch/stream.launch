@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="fosscam" name="ipcamera" type="ipcamera.py" output="screen" required="true" /> 
+</launch>

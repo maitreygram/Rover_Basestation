@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(rover_mobility)
+project(ip_cam_10)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
+  rospy
   std_msgs
 )
 
@@ -100,8 +100,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES rover_mobility
-#  CATKIN_DEPENDS roscpp std_msgs
+#  LIBRARIES ip_cam_10
+#  CATKIN_DEPENDS rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -117,27 +117,26 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(rover_mobility
-#   src/${PROJECT_NAME}/rover_mobility.cpp
+# add_library(ip_cam_10
+#   src/${PROJECT_NAME}/ip_cam_10.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(rover_mobility ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(ip_cam_10 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(joystick_run src/joystick_run.cpp)
+# add_executable(ip_cam_10_node src/ip_cam_10_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(rover_mobility_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(ip_cam_10_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-
-target_link_libraries(joystick_run
-  ${catkin_LIBRARIES}
-)
+# target_link_libraries(ip_cam_10_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -154,7 +153,7 @@ target_link_libraries(joystick_run
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS rover_mobility rover_mobility_node
+# install(TARGETS ip_cam_10 ip_cam_10_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -172,13 +171,14 @@ target_link_libraries(joystick_run
 #   # myfile1
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-#
+# )
+
 #############
 ## Testing ##
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_rover_mobility.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_ip_cam_10.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

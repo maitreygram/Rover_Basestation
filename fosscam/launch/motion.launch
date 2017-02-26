@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="fosscam" name="motion" type="motion.py" output="screen" required="true" /> 
+</launch>

@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="ip_cam_10" name="ip_cam_10" type="ip_cam_10.py" output="screen" required="true" />
+</launch>
