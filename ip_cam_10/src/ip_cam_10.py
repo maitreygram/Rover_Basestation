@@ -7,9 +7,10 @@ from sensor_msgs.msg import Image
 import roslib
 import sys
 import rospy
-import cv
+# import cv
 from std_msgs.msg import String
 from cv_bridge import CvBridge, CvBridgeError
+from detect_ball import detect_ball
 
 class ipcamera(object):
     def __init__(self, url):
@@ -30,23 +31,25 @@ class ipcamera(object):
 
 if __name__ == '__main__':
     try:
-        camUrl='rtsp://192.168.1.10:554/user=admin&password=&channel=1&stream=1.sdp'
+        camUrl='rtsp://192.168.0.102:5540/ch0'
         rospy.init_node('ipcam_10', anonymous=True)
         ip_camera = ipcamera(camUrl)
 
         while not rospy.is_shutdown():
-            rval, frame = ip_camera.stream.read()
-            if rval:
-                #cv2.imshow("Stream: webcam", frame)
-                (rval,frame) = ip_camera.stream.read()
-                ip_camera.image_pub.publish(ip_camera.bridge.cv2_to_imgmsg(frame, "bgr8"))
-            key = cv2.waitKey(1) & 0xFF
-            if key == ord("q"):
-                break
+        	ip_camera.stream.set(cv2.CAP_PROP_POS_MSEC, 500)
+        	rval, frame = ip_camera.stream.read()
+        	if rval:
+        		#cv2.imshow("Stream: webcam", frame)
+        		(rval,frame) = ip_camera.stream.read()
+        		frame = detect_ball(frame)
+        		ip_camera.image_pub.publish(ip_camera.bridge.cv2_to_imgmsg(frame, "8UC1"))
+        	key = cv2.waitKey(1) & 0xFF
+        	if key == ord("q"):
+        		break
         ip_camera.stream.release()
         cv2.destroyAllWindows()
     except rospy.ROSInterruptException:
-        pass
+    	pass
     '''
         ip_camera.bytes += ip_camera.stream.read(1024)
         a = ip_camera.bytes.find('\xff\xd8')
